@@ -1,13 +1,13 @@
-import tslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import eslintRecommended from '@eslint/js';
 import prettier from 'eslint-config-prettier';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import globals from 'globals';
 
 export default [
   {
     ...eslintRecommended.configs.recommended,
   },
-
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -16,18 +16,18 @@ export default [
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
+      globals: {
+        ...globals.node,
+      },
     },
+
     plugins: {
-      '@typescript-eslint': tslint,
+      '@typescript-eslint': tseslint,
     },
     rules: {
-      ...tslint.configs.recommended.rules,
+      ...tseslint.configs.recommended.rules,
     },
   },
 
-  {
-    rules: {
-      ...prettier,
-    },
-  },
+ prettier
 ];
