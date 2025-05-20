@@ -12,7 +12,7 @@ export async function readCompanies(): Promise<string[]> {
 
   for await (const line of rl) {
     const trimmed = line.trim();
-    if (trimmed.length > 0) {
+    if (trimmed.length > 3) {
       names.push(trimmed);
     }
   }
