@@ -1,5 +1,5 @@
 import { readCompanies } from './services/reader';
-import { groupCompanies } from './services/groupFinder';
+import { groupCompanies } from './services/groupCompanies';
 
 (async () => {
   const companiesNames = await readCompanies();
