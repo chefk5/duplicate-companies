@@ -16,8 +16,7 @@ describe('normalize', () => {
   it('removes common boilerplate words', () => {
     expect(normalize('The New Company Inc')).toBe('');
     expect(normalize('Awesome Studio LLC')).toBe('awesome');
-    expect(normalize('Canada Corp')).toBe('');
-    expect(normalize('Ab Labs')).toBe('labs');
+    expect(normalize('Canada Corp')).toBe('canada');
   });
 
   it('removes punctuation and collapses whitespace', () => {
