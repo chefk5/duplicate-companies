@@ -28,6 +28,14 @@ export default [
       ...tseslint.configs.recommended.rules,
     },
   },
+  {
+    files: ['**/*.test.ts', '**/__tests__/**/*.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+  },
 
  prettier
 ];
