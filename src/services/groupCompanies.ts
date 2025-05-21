@@ -3,10 +3,20 @@ import { getBucketKey } from './bucketer';
 import { normalize } from './normalizer';
 import { THRESHOLD } from '../config/config';
 
+
+/**
+ * Consists of 3 main steps:
+ * 1. Create bucket keys for all words in the array
+ * 2. for each company name, add it to its corresponding bucket
+ * 3. For each bucket run the algorithm to find duplicate companies
+ * 4. Return possible duplicate companies
+ *  @param names - A list of raw company names to be grouped
+ *  @returns An array of groups (each group is an array of similar names)
+ */
 export function groupCompanies(names: string[]): string[][] {
   const buckets = new Map<string, string[]>();
 
-  // Step 1: Put names in buckets
+  /** Step 1: Put names in buckets according if they have same key */
   for (const name of names) {
     const key = getBucketKey(name);
     if (!buckets.has(key)) {
@@ -14,8 +24,13 @@ export function groupCompanies(names: string[]): string[][] {
     }
     buckets.get(key)!.push(name);
   }
-
-  // Step 2: Compare within buckets
+/**
+ *    Step 2: Compare within buckets
+ *    For each bucket we compare 2 names in each iteration using JaroWinklerDistance algorithm
+ *    If the similarity score is above the threshold we add them to the same array (group)
+ *    If the name is already seen before we skip
+ *    If the group has more than 1 word, it is added to the final array "grouped"
+ * */
   const grouped: string[][] = [];
   const seen = new Set<string>();
 
